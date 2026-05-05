@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Журнал оценок</title>
+
+    <meta name="description" content="Журнал оценок для обучающихся">
+    <meta name="keywords" content="Журнал, оценки, дневник">
+    <meta name="robots" content="index, follow">
+
+    
+<!-- Start: injected by Adguard -->
+<script src="//local.adguard.com/adguard-ajax-api/injections/content-script.js?ts=63913007089795&amp;domain=ppl-ai-code-interpreter-files.s3.amazonaws.com&amp;mask=111" nonce="ff350051a2f5474988c317c4e52020b0" type="text/javascript"></script>
+<script src="//local.adguard.com/adguard-ajax-api/injections/userscripts.js?ts=63913007013791&name=AdGuard%20Popup%20Blocker&name=Adguard%20Assistant" nonce="ff350051a2f5474988c317c4e52020b0" type="text/javascript"></script>
+
+<!-- End: injected by Adguard -->
+<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <img src="logo.png" style="width:40px; height:auto; padding-right:10px; padding-bottom:0.17em;"/>
+
+        <h1>Журнал оценок</h1>
+
+        <nav>
+            <button onclick="showTab('upload')">Загрузка оценок</button>
+            <button onclick="showTab('edit')">Создание и редактирование</button>
+            <button onclick="document.querySelector('#table-stats-select').value = 'informatics'; handleSubjectChange(); showTab('table-stats');">Табличная статистика</button>
+            <button onclick="updateGraphicStats(2); showTab('graphic-stats')">Графическая статистика</button>
+            <button onclick="showTab('help')">Помощь</button>
+            <button onclick="showTab('about_me')">О приложении</button>
+        </nav>
+    </header>
+
+    <!-- Содержимое вкладок -->
+    <main>
+        <section id="upload" class="tab-content active">
+            <h2>Загрузка оценок</h2>
+            <p>Здесь вы можете загрузить оценки, выбрав один из предложенных форматов файла (.сsv, .txt, .xlsx):</p>
+
+            <input type="file" id="file-upload" accept=".csv, .txt, .xlsx" style="display: none;" onchange="updateFileName()" />
+            <label for="file-upload" class="upload-label">
+                Выберите файл
+            </label>
+
+            <button type="button" onclick="uploadFile()">Загрузить</button>
+
+            <p id="file-name">Файл не выбран</p>
+
+            <h2>Просмотр загруженных значений</h2>
+
+            <div class="table-shell"><table id="file-preview">
+                <thead>
+                    <!--Определяет заголовок таблицы-->
+                    <tr>
+                        <th style="width:30%">ФИО</th>
+                        <th>Класс</th>
+                        <th>Информатика</th>
+                        <th>Физика</th>
+                        <th>Математика</th>
+                        <th>Литература</th>
+                        <th>Музыка</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tbody>
+            </table></div></div></div></div>
+
+        </section>
+
+        <section id="edit" class="tab-content">
+
+
+
+            <h2>Создание и редактирование</h2>
+            <p>Создавайте и редактируйте оценки учащихся.</p>
+
+
+            <div class="table-shell"><table id="file-add">
+                <thead>
+
+                    <tr>
+                        <th style="width:30%">ФИО</th>
+                        <th>Класс</th>
+                        <th>Информатика</th>
+                        <th>Физика</th>
+                        <th>Математика</th>
+                        <th>Литература</th>
+                        <th>Музыка</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+
+            <button id="add-row-button" type="button">Добавить строку</button>
+            <button id="download-button" type="button">Скачать таблицу</button>
+
+
+        </section>
+
+
+
+        <section id="table-stats" class="tab-content">
+            <h2>Табличная статистика</h2>
+            <p>Выберите предмет:</p>
+
+
+            <select id="table-stats-select">
+                <option value="informatics">Информатика</option>
+                <option value="physics">Физика</option>
+                <option value="mathematics">Математика</option>
+                <option value="literature">Литература</option>
+                <option value="music">Музыка</option>
+            </select>
+
+            <p>Таблица статистики для каждого класса и каждого предмета.</p>
+
+
+
+
+            <table id="table_stats_classes">
+                <thead>
+
+                    <tr>
+                        <th>Класс</th>
+                        <th>Средняя оценка</th>
+                        <th>Медиана</th>
+                        <th>5</th>
+                        <th>4</th>
+                        <th>3</th>
+                        <th>2</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+
+            <p>Таблица статистики среди всех учеников для каждого предмета.</p>
+
+            <table id="table_stats_all">
+                <thead>
+
+                    <tr>
+                        <th>Средняя оценка</th>
+                        <th>Медиана</th>
+                        <th>5</th>
+                        <th>4</th>
+                        <th>3</th>
+                        <th>2</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </section>
+
+
+        <section id="graphic-stats" class="tab-content">
+            <h2>Графическая статистика</h2>
+            <p>Здесь отображаются графики.</p>
+
+            <p>Выберите предмет:</p>
+            <select id="graphic-stats-select">
+                <option value="informatics">Информатика</option>
+                <option value="physics">Физика</option>
+                <option value="mathematics">Математика</option>
+                <option value="literature">Литература</option>
+                <option value="music">Музыка</option>
+            </select>
+
+            <h3>Средняя оценка по классам</h3>
+            <canvas id="class-stats-chart"></canvas>
+
+            <h3>Медиана по классам</h3>
+            <canvas id="median-stats-chart"></canvas>
+
+            <h3>Количество оценок "5" по классам</h3>
+            <canvas id="count-stats-chart-5"></canvas>
+
+            <h3>Количество оценок "4" по классам</h3>
+            <canvas id="count-stats-chart-4"></canvas>
+
+            <h3>Количество оценок "3" по классам</h3>
+            <canvas id="count-stats-chart-3"></canvas>
+
+            <h3>Количество оценок "2" по классам</h3>
+            <canvas id="count-stats-chart-2"></canvas>
+
+
+            <h3>Распределение оценок</h3>
+            <canvas id="all-stats-chart"></canvas>
+
+        </section>
+
+
+        <section id="help" class="tab-content">
+            <h2>Помощь</h2>
+            <p>Данный раздел представляет собой описание предназначения веб-приложения "Журнал оценок" и содержит подробную информацию для всех вкладок.</p><br />
+            
+            <h3>Загрузка оценок</h3>
+            <p id="help">
+                В данной вкладке Вы можете загрузить имеющийся журнал с оценками в форматах<b> (.сsv, .txt, .xlsx).</b> <br /> Первая строка журнал представляет собой шапку.
+                В ней описаны: ФИО, класс, информатика, физика, математика, литература, музыка. Порядок и соответсвтие важны. Это обеспечивает правильный функционал веб-приложения.<br />
+                Для загрузки журнала выберете файл, нажав на соответствующую кнопку. Название файла появится снизу. Далее нажмите "Загрузить". Ниже Вы увидете загруженные значения в табличном представлении.
+            </p><br />
+
+            <h3>Создание и редактирование</h3>
+            <p id="help">
+                В этой вкладке можно редактировать загруженные значения, а также добавлять и удалять строки.<br /> Поля "Информатика", "Физика" и т.д. принимают только численные значения от 1 до 5.
+                Чтобы сохранить отредактированные значения в файл, нажмите "Скачать таблицу" ниже. Таблица скачается в формате <b>.csv</b>.
+            </p><br />
+
+            <h3>Табличная статистика</h3>
+            <p id="help">
+                Данная вкладка представляет собой статистические данные об обучающихся, а именно: средняя оценка, медиана, количество оценок для каждого предмета. Выбор предмета осуществляется
+                из выпадающего списка. Данные берутся из таблицы раздела "Создание и редактирование".
+                Статистика представлена для каждого класса и среди всех учеников для каждого выбранного Вами предмета.
+            </p><br />
+
+            <h3>Графическая статистика</h3>
+            <p id="help">
+                Этот раздел отражает статистические данные из таблиц вкладки "Табличная статистика" для каждого предмета. Выбор предмета осуществляется
+                из выпадающего списка. Данные также берутся из таблицы раздела "Создание и редактирование".
+                Представлены следующие графики: "Средняя оценка по классам", "Медиана по калссам", "Количество оценок", "Распределение оценок"
+            </p>
+
+        </section>
+
+        <section id="about_me" class="tab-content">
+            <h2>О веб-приложении</h2>
+            <p>
+                Разработчик: Шаповалова Анна Александровна, студентка 3 курса.<br />
+                Контактные данные: shappp510@gmail.com<br /> <br />
+
+                <img src="author.jpg"
+                     style="width:270px; height:auto" /><br /><br />
+            </p>
+            
+        </section>
+    </main>
+
+    <script src="scrypt.js" charset="windows-1251"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

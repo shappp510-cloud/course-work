@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,355;1,355&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    font-family: "Roboto Condensed", serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eeeeee;
+}
+
+header {
+    /*Выравнивание элементов*/
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+
+    background-color: #2F706E;
+    color: #C1FBDE;
+    padding: 0.7em;
+    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1);
+}
+
+    header h1 
+    {
+        font-weight:300;
+        margin: 0;
+        margin-right:2em;
+        font-size: 1.5em;
+        padding-bottom:0.17em;
+    }
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+        
+}
+
+    nav button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-family: "Roboto Condensed", serif;
+        font-size: 1em;
+        padding: 0.5em 1em;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        nav button:hover {
+           
+            background-color: #275b59;
+            transform: scale(1.1);
+        }
+
+main {
+    padding: 1em;
+}
+
+.tab-content {
+    display: none;
+}
+
+    .tab-content.active {
+        display: block;
+    }
+
+
+
+/* Стиль для кнопки выбора файла */
+.upload-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Зеленый цвет */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+    /* Эффект при наведении на кнопку */
+    .upload-label:hover {
+        background-color: #45a049;
+    }
+
+/* Стиль для текста с именем файла */
+#file-name {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Стиль для кнопки загрузки */
+section button {
+    font-family: "Roboto Condensed", serif;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #008CBA; 
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+section button:hover {
+        background-color: #007B9A;
+    }
+
+
+table {
+    width: 70%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+    table th, table td {
+        border: 1px solid #ccc;
+        padding: 0.5rem;
+        text-align: left;
+    }
+
+    table tbody tr th {
+        height:15px;
+        background-color: #f4f4f4;
+    }
+
+
+
+td input {
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    /* Стили при фокусе */
+    td input:focus {
+        border-color: #007BFF;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+
+
+table .delete-button  {
+    background-color: red; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 2px 4px; 
+    font-size: 0.7rem; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+
+    table .delete-button:hover {
+        background-color: darkred; 
+    }
+
+
+select {
+    width: 175px;
+    padding: 5px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    select:focus {
+        border-color: #007BFF;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+    }
+
+    select:hover {
+        background-color: #f1f1f1;
+    }
+
+
+canvas {
+    max-width: 600px;
+    max-height: 300px;
+}
+
+p#help {
+    text-align: justify;
+    max-width: 70%;
+    
+}
+
+:root {
+  --bg-main: #fff6fc;
+  --bg-soft: #f9ebff;
+  --panel: #ffffff;
+  --panel-soft: #fff0fa;
+  --text-main: #4b2348;
+  --text-soft: #7b4c77;
+  --accent-1: #d16bcb;
+  --accent-2: #b56cff;
+  --accent-3: #f08bc4;
+  --accent-4: #8b5cf6;
+  --border-soft: #efc7ea;
+  --shadow-soft: 0 12px 30px rgba(191, 108, 194, 0.18);
+}
+
+body {
+  background: linear-gradient(180deg, #fff7fc 0%, #f9edff 100%);
+  color: var(--text-main);
+}
+
+header {
+  background: linear-gradient(135deg, var(--accent-4) 0%, var(--accent-2) 45%, var(--accent-3) 100%);
+  color: #fff;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  padding: 1rem 1.2rem;
+}
+
+header h1 {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+nav button {
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 999px;
+  padding: 0.65em 1.1em;
+}
+
+nav button:hover {
+  background: rgba(255,255,255,0.26);
+  transform: translateY(-1px);
+}
+
+main {
+  padding: 1.2rem;
+}
+
+section h2, section h3 {
+  color: #7c2d88;
+}
+
+.upload-label,
+section button,
+#download-button,
+#add-row-button {
+  background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+  color: white;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(209, 107, 203, 0.25);
+}
+
+.upload-label:hover,
+section button:hover,
+#download-button:hover,
+#add-row-button:hover {
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+}
+
+select,
+td input {
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  background: #fffafd;
+  color: var(--text-main);
+}
+
+select:focus,
+td input:focus {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 4px rgba(181, 108, 255, 0.18);
+}
+
+.table-shell {
+  overflow: hidden;
+  border-radius: 26px;
+  background: var(--panel);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+  margin: 1rem 0 1.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
+  background: var(--panel);
+}
+
+table thead th {
+  background: linear-gradient(180deg, #f5d6f7 0%, #efb9ea 100%);
+  color: #5f2459;
+  font-weight: 700;
+}
+
+table th,
+table td {
+  border: none;
+  border-bottom: 1px solid #f3d9f0;
+  padding: 0.75rem 0.8rem;
+}
+
+table tbody tr {
+  background: #fff;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+table tbody tr:nth-child(even) {
+  background: #fff7fc;
+}
+
+table tbody tr:hover {
+  background: #fdeefe;
+}
+
+table thead tr th:first-child { border-top-left-radius: 24px; }
+table thead tr th:last-child { border-top-right-radius: 24px; }
+table tbody tr:last-child td:first-child { border-bottom-left-radius: 24px; }
+table tbody tr:last-child td:last-child { border-bottom-right-radius: 24px; }
+
+#file-name, .tab-content p, #help, #help2, #help3, #help4 {
+  color: var(--text-soft);
+}
+
+.delete-button {
+  background: linear-gradient(135deg, #fb7185, #e11d48) !important;
+  border-radius: 999px !important;
+  padding: 0.35rem 0.65rem !important;
+}
+
+.delete-button:hover {
+  background: linear-gradient(135deg, #f43f5e, #be123c) !important;
+}
+
+canvas {
+  background: #fff;
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+  padding: 0.8rem;
+  box-shadow: var(--shadow-soft);
+}
+
+@media (max-width: 900px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+  }
+
+  .table-shell {
+    overflow-x: auto;
+  }
+}
